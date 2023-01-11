@@ -125,21 +125,21 @@ class Swimming(Training):
     def get_mean_speed(self) -> float:
         '''Формула расчёта средней скорости при плавании'''
         return (
-             self.length_pool
-             * self.count_pool
-             / self.M_IN_KM
-             / self.duration
-             )
+            self.length_pool
+            * self.count_pool
+            / self.M_IN_KM
+            / self.duration
+            )
 
     def get_spent_calories(self) -> float:
         '''Формула для расчёта израсходованных калорий'''
         return (
-               (self.get_mean_speed()
+            (self.get_mean_speed()
                 + self.CALORIES_MULTIPLIER)
-                * self.CALORIES_SPEED_HEIGHT_MULTIPLIER
-                * self.weight
-                * self.duration
-                )
+            * self.CALORIES_SPEED_HEIGHT_MULTIPLIER
+            * self.weight
+            * self.duration
+            )
 
 
 def read_package(workout_type: str, data: list[str]) -> Training:
