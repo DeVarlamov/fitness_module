@@ -128,8 +128,7 @@ class Swimming(Training):
             self.length_pool
             * self.count_pool
             / self.M_IN_KM
-            / self.duration
-            )
+            / self.duration)
 
     def get_spent_calories(self) -> float:
         '''Формула для расчёта израсходованных калорий'''
@@ -138,8 +137,7 @@ class Swimming(Training):
                 + self.CALORIES_MULTIPLIER)
             * self.CALORIES_SPEED_HEIGHT_MULTIPLIER
             * self.weight
-            * self.duration
-            )
+            * self.duration)
 
 
 def read_package(workout_type: str, data: list[str]) -> Training:
