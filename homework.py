@@ -11,7 +11,7 @@ class InfoMessage:
         'Дистанция: {distance:.3f} км; '
         'Ср. скорость: {speed:.3f} км/ч; '
         'Потрачено ккал: {calories:.3f}.'
-    )
+              )
     training_type: str
     duration: float
     distance: float
@@ -100,7 +100,8 @@ class SportsWalking(Training):
                 * self.CALORIES_SPEED_HEIGHT_MULTIPLIER
                 * self.weight)
             * (self.duration
-                * self.MIN_IN_H))
+                * self.MIN_IN_H)
+                )
 
 
 @dataclass
@@ -123,7 +124,7 @@ class Swimming(Training):
              * self.count_pool
              / self.M_IN_KM
              / self.duration)
-             )
+               )
 
     def get_spent_calories(self) -> float:
         '''Формула для расчёта израсходованных калорий'''
