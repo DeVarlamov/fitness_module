@@ -1,5 +1,5 @@
 from dataclasses import asdict, dataclass
-from typing import List, Type
+from typing import Dict, List, Type
 
 
 @dataclass
@@ -21,6 +21,7 @@ class InfoMessage:
         return self.MESSAGE.format(**asdict(self))
 
 
+@dataclass
 class Training:
     """Базовый класс тренировки."""
     LEN_STEP = 0.65
@@ -28,14 +29,9 @@ class Training:
     MIN_IN_H = 60.0
     CM_IN_M = 100.0
 
-    def __init__(self,
-                 action: int,
-                 duration: float,
-                 weight: float,
-                 ) -> None:
-        self.action = action
-        self.duration = duration
-        self.weight = weight
+    action: int
+    duration: float
+    weight: float
 
     def get_distance(self) -> float:
         """Получить дистанцию в км."""
@@ -69,6 +65,7 @@ class Running(Training):
     CALORIES_MEAN_SPEED_SHIFT = 1.79
 
     def get_spent_calories(self) -> float:
+        '''Перерасчет калорий для бега'''
         return ((self.CALORIES_MEAN_SPEED_MULTIPLIER * self.get_mean_speed()
                 + self.CALORIES_MEAN_SPEED_SHIFT)
                 * self.weight / self.M_IN_KM * (self.duration * self.MIN_IN_H))
@@ -127,7 +124,7 @@ class Swimming(Training):
 
 def read_package(workout_type: str, data: List[int]) -> Training:
     """Прочитать данные полученные от датчиков."""
-    TRAINING_TYPES: Type[Training: str] = {
+    TRAINING_TYPES: Dict[str, Type[Training]] = {
         'RUN': Running,
         'WLK': SportsWalking,
         'SWM': Swimming,
